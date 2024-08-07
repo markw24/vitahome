@@ -5,7 +5,6 @@ export default function RootLayout({ children }) {
   return (
     <html>
       <body>
-        <header>My App</header>
         <main>{children}</main>
         <footer>Footer Content</footer>
       </body>
