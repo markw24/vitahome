@@ -2,8 +2,8 @@ import React from "react";
 
 export default function EquipmentList({ equipment }) {
   return (
-    <div>
-      <h1>Equipment List</h1>
+    <div className="text-black">
+      <h1 className="text-black">Equipment List</h1>
       <table>
         <thead>
           <tr>

@@ -1,4 +1,5 @@
 import { fetchEquipment } from "./databaseFiles/fetchEquipment";
+import SequentialEquipmentDisplay from "./components/sequentialEquipment";
 import EquipmentList from "./components/equipmentList";
 import Navbar from "./components/Navbar";
 
@@ -6,12 +7,13 @@ export default async function HomePage() {
   const equipment = await fetchEquipment();
 
   return (
-    <>
+    <div>
       <main className="bg-white min-h-screen">
         <Navbar />
-        
-        <EquipmentList equipment={equipment} />
+        <div>
+          <SequentialEquipmentDisplay equipment={equipment} />
+        </div>
       </main>
-    </>
+    </div>
   );
 }

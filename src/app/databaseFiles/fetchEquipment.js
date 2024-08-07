@@ -18,6 +18,7 @@ export async function fetchEquipment() {
         equipment_details ed ON e.id = ed.equipment_id
       JOIN 
         vendors v ON ed.vendor_id = v.id
+      ORDER BY ec.name, e.name
     `);
     return rows;
   } catch (error) {
