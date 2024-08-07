@@ -1,4 +1,4 @@
-import { fetchEquipment } from "./fetchEquipment";
+import { fetchEquipment } from "./databaseFiles/fetchEquipment";
 import EquipmentList from "./components/equipmentList";
 
 export default async function HomePage() {
