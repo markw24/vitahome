@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         Montserrat: ['Montserrat', 'sans-serif'],
+        Playfair: ['Playfair Display', 'serif'],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
