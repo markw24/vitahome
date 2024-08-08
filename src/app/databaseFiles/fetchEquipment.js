@@ -3,20 +3,21 @@ import pool from "./db";
 export async function fetchEquipment() {
   try {
     const [rows] = await pool.query(`
-      SELECT 
+      SELECT
         e.id AS equipment_id,
         e.name AS equipment_name,
+        e.category_id AS category_id,
         ec.name AS category_name,
         v.name AS vendor_name,
         ed.price,
         ed.order_link
-      FROM 
+      FROM
         equipment e
-      JOIN 
+      JOIN
         equipment_categories ec ON e.category_id = ec.id
-      JOIN 
+      JOIN
         equipment_details ed ON e.id = ed.equipment_id
-      JOIN 
+      JOIN
         vendors v ON ed.vendor_id = v.id
       ORDER BY ec.name, e.name
     `);

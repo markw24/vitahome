@@ -1,13 +1,13 @@
 // components/FetchCategories.js
 import { useEffect, useState } from "react";
-import { fetchEquipmentCategories } from "./fetchEquipment";
+import { fetchEquipment } from "./fetchEquipment";
 
 export default function FetchCategories({ onCategoriesFetched }) {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     async function getCategories() {
-      const data = await fetchEquipmentCategories();
+      const data = await fetchEquipment();
       setCategories(data);
       onCategoriesFetched(data);
     }

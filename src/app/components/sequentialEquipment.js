@@ -1,19 +1,39 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 function SequentialEquipmentDisplay({ equipment }) {
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
+  const [currentCategory, setCurrentCategory] = useState("");
+  const [currentEquipment, setCurrentEquipment] = useState([]);
 
-  // Group equipment by category
-  const categories = equipment.reduce((acc, item) => {
-    if (!acc[item.category_name]) {
-      acc[item.category_name] = [];
+  // Memoize the grouped categories to prevent recalculating on every render
+  const categories = useMemo(() => {
+    return equipment.reduce((acc, item) => {
+      if (!acc[item.category_name]) {
+        acc[item.category_name] = [];
+      }
+      acc[item.category_name].push(item);
+      return acc;
+    }, {});
+  }, [equipment]);
+
+  // Memoize the category names to prevent recalculating on every render
+  const categoryNames = useMemo(() => Object.keys(categories), [categories]);
+
+  useEffect(() => {
+    // Clear current equipment list to prevent carryover
+    setCurrentEquipment([]);
+
+    // Update current category and equipment when currentCategoryIndex changes
+    if (categoryNames.length > 0) {
+      const category = categoryNames[currentCategoryIndex];
+      setCurrentCategory(category);
+      // Use a timeout to simulate async state change and ensure the equipment is updated cleanly
+      setTimeout(() => {
+        setCurrentEquipment(categories[category] || []);
+      }, 0);
     }
-    acc[item.category_name].push(item);
-    return acc;
-  }, {});
-
-  const categoryNames = Object.keys(categories);
+  }, [currentCategoryIndex, categories, categoryNames]);
 
   const handleNext = () => {
     if (currentCategoryIndex < categoryNames.length - 1) {
@@ -27,12 +47,10 @@ function SequentialEquipmentDisplay({ equipment }) {
     }
   };
 
-  const currentCategory = categoryNames[currentCategoryIndex];
-  const currentEquipment = categories[currentCategory];
-
   return (
     <div className="text-black flex flex-col items-center">
       <h1 className="text-6xl font-bold p-4 mb-6">{currentCategory}</h1>
+
       <ul className="flex flex-col space-y-4 w-full max-w-3xl">
         {currentEquipment.map((item) => (
           <li
