@@ -26,7 +26,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font to body */
+  font-family: 'Montserrat', sans-serif;
 }
 
 @layer utilities {
@@ -34,8 +34,3 @@ body {
     text-wrap: balance;
   }
 }
-
-.footer-shape {
-  @apply absolute top-[-100px] left-0 w-full h-[200px] bg-[#a8bfa3] rounded-t-full;
-}
-

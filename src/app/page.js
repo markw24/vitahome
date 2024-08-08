@@ -12,7 +12,7 @@ export default async function HomePage() {
       <main className="bg-white min-h-screen">
         <Navbar />
         <IntroBox />
-        {/* <EquipmentList equipment={equipment} /> */}
+        <EquipmentList equipment={equipment} />
 
         <div className="flex flex-col space-y-5 items-center p-20">
           <div className="bg-white rounded-full border-2 border-[#1F5434] px-8 py-2 inline-block group hover:bg-[#1F5434] hover:bg-opacity-75">
