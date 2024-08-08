@@ -13,7 +13,7 @@ const Navbar = () => {
       <img alt="main logo" src="vita-logo.svg"/>
       <div className="flex space-x-10">
         <div className="text-black text-[20px] font-bold flex items-center hover:text-[#1F5434]">
-          <Link href="/dashboard" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2">
             <FiHome/>
             <span>Home</span>
           </Link>

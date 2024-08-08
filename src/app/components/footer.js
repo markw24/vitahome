@@ -4,7 +4,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="relative bg-[#a8bfa3] overflow-hidden pb-10">
+    <footer className="relative bg-[#a8bfa3] overflow-hidden">
       <div className="footer-content relative z-10 p-10">
         <div className="flex justify-between items-center">
           <img src="vita-logo.svg" alt="Vita Home Logo" />
@@ -27,7 +27,7 @@ const Footer = () => {
             By subscribing you agree to with our <Link href="#"><span className="underline">Privacy Policy</span></Link>
           </p>
         </div>
-        <div className="mt-6 flex justify-between items-center border-t pt-4">
+        <div className="mt-6 flex justify-between items-center border-t pt-5">
           <nav className="flex space-x-4">
             <Link href="#"><span className="text-sm text-gray-600 hover:text-gray-800">Privacy Policy</span></Link>
             <Link href="#"><span className="text-sm text-gray-600 hover:text-gray-800">Terms of Service</span></Link>
