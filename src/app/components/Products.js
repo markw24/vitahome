@@ -3,6 +3,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import React, { useState, useRef, useEffect } from 'react';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
+import BiggerCard from './BiggerCard'
 
 const categories = [
   {
@@ -48,6 +49,7 @@ const categories = [
 
 const ProductPage = () => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const sliderRef = useRef(null);
 
   const handlePrev = () => {
@@ -93,8 +95,8 @@ const ProductPage = () => {
         </button>
         <Slider ref={sliderRef} {...settings}>
           {categories.map((category, index) => (
-            <div key={index} className="text-center px-2" tabIndex={-1}> 
-              <h2 className={`text-lg font-bold ${index === selectedCategoryIndex ? 'text-[#1F5434] text-lg' : 'text-black'}`}>
+            <div key={index} className="text-center px-2" tabIndex={-1}>
+              <h2 className={`text-lg font-bold ${index === selectedCategoryIndex ? 'text-[#1F5434] text-3xl' : 'text-black'}`}>
                 {category.title}
               </h2>
             </div>
@@ -110,7 +112,11 @@ const ProductPage = () => {
 
       <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {categories[selectedCategoryIndex].products.map((product, index) => (
-          <div key={index} className="border p-4 rounded-lg shadow-md">
+          <div
+            key={index}
+            className="border p-4 rounded-lg shadow-md cursor-pointer"
+            onClick={() => setSelectedProduct(product)}
+          >
             <img src={product.image} alt={product.name} className="w-full h-48 object-contain" />
             <h3 className="text-lg font-semibold">{product.name}</h3>
             <p className="text-black">{product.brand}</p>
@@ -119,6 +125,14 @@ const ProductPage = () => {
           </div>
         ))}
       </div>
+
+      {selectedProduct && (
+        <BiggerCard
+          product={selectedProduct}
+          isOpen={!!selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+        />
+      )}
     </div>
   );
 };
