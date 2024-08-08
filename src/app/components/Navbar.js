@@ -5,7 +5,6 @@ import { FiHome } from "react-icons/fi";
 import { TiDocumentText } from "react-icons/ti";
 import { IoPersonOutline } from "react-icons/io5";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
-import { useRouter } from 'next/router';
 
 const Navbar = () => {
   return (
@@ -20,7 +19,7 @@ const Navbar = () => {
         </div>
         <div className="text-black text-[20px] font-bold flex items-center hover:text-[#1F5434]">
           <Link href="/about" className="flex items-center space-x-2">
-            <TiDocumentText className='flex '/>
+            <TiDocumentText/>
             <span>About us</span>
           </Link>
         </div>
