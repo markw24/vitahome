@@ -1,8 +1,10 @@
 "use client";
 import React, { useState, useEffect, useMemo } from "react";
 
+// Detailed view modal component
 function ProductDetailModal({ product, onClose }) {
   if (!product) return null;
+
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center">
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
@@ -14,7 +16,7 @@ function ProductDetailModal({ product, onClose }) {
           <strong>Vendor:</strong> {product.vendor_name}
         </p>
         <p>
-          <strong>Price:</strong> ${product.price}
+          <strong>Price:</strong> ${product.price.toFixed(2)}
         </p>
         <p>
           <strong>Description:</strong>{" "}
@@ -38,13 +40,14 @@ function ProductDetailModal({ product, onClose }) {
     </div>
   );
 }
-function SequentialEquipmentDisplay({ equipment }) {
+
+function SequentialEquipmentDisplay({ equipment = [] }) {
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
   const [currentCategory, setCurrentCategory] = useState("");
   const [currentEquipment, setCurrentEquipment] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // Memoize the grouped categories to prevent recalculating on every render
+  // Memoize the grouped categories
   const categories = useMemo(() => {
     return equipment.reduce((acc, item) => {
       if (!acc[item.category_name]) {
@@ -55,21 +58,15 @@ function SequentialEquipmentDisplay({ equipment }) {
     }, {});
   }, [equipment]);
 
-  // Memoize the category names to prevent recalculating on every render
   const categoryNames = useMemo(() => Object.keys(categories), [categories]);
 
   useEffect(() => {
-    // Clear current equipment list to prevent carryover
     setCurrentEquipment([]);
 
-    // Update current category and equipment when currentCategoryIndex changes
     if (categoryNames.length > 0) {
       const category = categoryNames[currentCategoryIndex];
       setCurrentCategory(category);
-      // Use a timeout to simulate async state change and ensure the equipment is updated cleanly
-      setTimeout(() => {
-        setCurrentEquipment(categories[category] || []);
-      }, 0);
+      setCurrentEquipment(categories[category] || []);
     }
   }, [currentCategoryIndex, categories, categoryNames]);
 
@@ -84,6 +81,7 @@ function SequentialEquipmentDisplay({ equipment }) {
       setCurrentCategoryIndex(currentCategoryIndex - 1);
     }
   };
+
   const handleProductClick = (product) => {
     setSelectedProduct(product);
   };
@@ -107,16 +105,8 @@ function SequentialEquipmentDisplay({ equipment }) {
               {item.equipment_name}
             </div>
             <div className="text-sm text-gray-600 mb-2">{item.vendor_name}</div>
-            <div className="text-lg font-medium mb-2">${item.price}</div>
-            <div>
-              <a
-                href={item.order_link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
-              >
-                Buy Now
-              </a>
+            <div className="text-lg font-medium mb-2">
+              ${item.price.toFixed(2)}
             </div>
           </li>
         ))}
@@ -137,6 +127,8 @@ function SequentialEquipmentDisplay({ equipment }) {
           Next
         </button>
       </div>
+
+      {/* Render the product detail modal if a product is selected */}
       <ProductDetailModal
         product={selectedProduct}
         onClose={handleCloseModal}
