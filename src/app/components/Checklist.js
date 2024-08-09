@@ -48,7 +48,7 @@ const Checklist = () => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-wrap justify-center gap-6 w-full max-w-6xl mx-auto px-6">
-      <h2 className="text-center text-[40px] font-Playfair w-full text-[#1F5434]">Please Check Off the Relevant Items</h2>
+      <h2 className="text-center text-[40px] font-Playfair w-full font-bold text-[#1F5434]">Please Check Off the Relevant Items</h2>
       <div className="flex flex-wrap justify-between w-full">
         {categories.map((category) => (
           <div key={category.title} className="category bg-white p-6 rounded-lg shadow-lg flex-[0_0_calc(50%-12px)] mb-6">
