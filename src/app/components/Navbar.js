@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import { FiHome } from "react-icons/fi";
 import { TiDocumentText } from "react-icons/ti";
-import { IoPersonOutline } from "react-icons/io5";
+import { FiShoppingCart } from "react-icons/fi";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 
 const Navbar = () => {
@@ -30,9 +30,9 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="text-black text-[20px] font-bold flex items-center pr-10 hover:text-[#1F5434]">
-          <Link href="/contact" className="flex items-center space-x-2">
-            <IoPersonOutline />
-            <span>Contact Us</span>
+          <Link href="/cart" className="flex items-center space-x-2">
+            <FiShoppingCart />
+            <span>Shopping Cart</span>
           </Link>
         </div>
         <div className="bg-white py-3 px-8 rounded-full max-w-l border-2 border-[#1F5434] hover:bg-[#1F5434] hover:bg-opacity-75 group">
