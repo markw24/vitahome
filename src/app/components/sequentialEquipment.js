@@ -1,43 +1,47 @@
 "use client";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 import React, { useState, useEffect, useMemo } from "react";
 
 function ProductDetailModal({ product, onClose }) {
   if (!product) return null;
+
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-        <h2 className="text-2xl font-bold mb-4">{product.equipment_name}</h2>
-        <p>
-          <strong>Category:</strong> {product.category_name}
-        </p>
-        <p>
-          <strong>Vendor:</strong> {product.vendor_name}
-        </p>
-        <p>
-          <strong>Price:</strong> ${product.price}
-        </p>
-        <p>
-          <strong>Description:</strong>{" "}
-          {product.description || "No description available."}
-        </p>
-        <a
-          href={product.order_link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 hover:underline"
-        >
-          Buy Now
-        </a>
+      <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full relative">
         <button
           onClick={onClose}
-          className="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg"
+          className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
         >
-          Close
+          &times;
+        </button>
+        <h2 className="text-2xl font-bold mb-4 text-center">
+          {product.equipment_name}
+        </h2>
+        <img
+          src="wheelchair_mark.svg"
+          alt="product image"
+          className="w-full h-48 object-contain mb-4"
+        />
+        <p className="text-xl font-semibold text-center mb-4">
+          ${product.price}
+        </p>
+        <p className="mb-4 text-center text-black">
+          More detailed information about the product goes here...
+        </p>
+        <button className="mt-4 w-full bg-[#1F5434] hover:bg-green-600 text-white py-2 rounded">
+          Add to Cart
+        </button>
+        <button className="mt-2 w-full bg-gray-300 hover:bg-gray-400 text-black py-2 rounded">
+          Reviews
         </button>
       </div>
     </div>
   );
 }
+
 function SequentialEquipmentDisplay({ equipment }) {
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
   const [currentCategory, setCurrentCategory] = useState("");
@@ -84,6 +88,7 @@ function SequentialEquipmentDisplay({ equipment }) {
       setCurrentCategoryIndex(currentCategoryIndex - 1);
     }
   };
+
   const handleProductClick = (product) => {
     setSelectedProduct(product);
   };
@@ -93,50 +98,55 @@ function SequentialEquipmentDisplay({ equipment }) {
   };
 
   return (
-    <div className="text-black flex flex-col items-center">
-      <h1 className="text-6xl font-bold p-4 mb-6">{currentCategory}</h1>
-
-      <ul className="flex flex-col space-y-4 w-full max-w-3xl">
-        {currentEquipment.map((item) => (
-          <li
-            key={item.equipment_id}
-            className="border border-black p-4 rounded-lg shadow-md cursor-pointer"
-            onClick={() => handleProductClick(item)}
-          >
-            <div className="text-lg font-semibold mb-2">
-              {item.equipment_name}
-            </div>
-            <div className="text-sm text-gray-600 mb-2">{item.vendor_name}</div>
-            <div className="text-lg font-medium mb-2">${item.price}</div>
-            <div>
-              <a
-                href={item.order_link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
-              >
-                Buy Now
-              </a>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <div className="mt-6">
+    <div className="p-6">
+      <div className="flex justify-between items-center mb-8">
         <button
           onClick={handlePrevious}
           disabled={currentCategoryIndex === 0}
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg mr-4 disabled:opacity-50"
+          className="bg-gray-200 p-2 rounded-full hover:bg-gray-300 disabled:opacity-50"
         >
-          Previous
+          <span className="sr-only">Previous</span>
+          <FaArrowAltCircleLeft />
         </button>
+
+        <h1 className="text-3xl text-black font-semibold text-center flex-grow">
+          {currentCategory}
+        </h1>
+
         <button
           onClick={handleNext}
           disabled={currentCategoryIndex === categoryNames.length - 1}
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg disabled:opacity-50"
+          className="bg-gray-200 p-2 rounded-full hover:bg-gray-300 disabled:opacity-50"
         >
-          Next
+          <span className="sr-only">Next</span>
+          <FaArrowAltCircleRight />
         </button>
       </div>
+
+      <div className="text-black grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {currentEquipment.map((item) => (
+          <div
+            key={item.equipment_id}
+            className="border p-4 rounded-lg shadow-md cursor-pointer"
+            onClick={() => handleProductClick(item)}
+          >
+            <img
+              src={item.image_url || "wheelchair_mark.svg"}
+              alt={item.equipment_name}
+              className="w-full h-48 object-contain"
+            />
+            <h3 className="text-lg font-semibold mt-4">
+              {item.equipment_name}
+            </h3>
+            <p className="text-gray-700">{item.vendor_name}</p>
+            <p className="text-green-600 font-bold mt-2">${item.price}</p>
+            <button className="mt-4 w-full bg-green-700 hover:bg-green-800 text-white py-2 rounded">
+              Add to Cart
+            </button>
+          </div>
+        ))}
+      </div>
+
       <ProductDetailModal
         product={selectedProduct}
         onClose={handleCloseModal}
