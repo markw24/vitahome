@@ -11,7 +11,7 @@ const Footer = () => {
           <nav className="flex flex-col space-x-4">
             <h1 className='text-black pb-5'>Subscribe</h1>
             <form className="flex space-x-2">
-              <input type="email" placeholder="Enter your email" className="p-2 border rounded-full flex text-center" />
+              <input type="email" placeholder="Enter your email" className="p-2 text-black border rounded-full flex text-center" />
               <button type="submit" className="bg-[#1F5434] text-white px-4 py-2 rounded-full">Subscribe</button>
             </form>
           </nav>
