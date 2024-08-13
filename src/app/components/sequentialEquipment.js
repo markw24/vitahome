@@ -18,7 +18,7 @@ function ProductDetailModal({ product, onClose }) {
           &times;
         </button>
         <h2 className="text-2xl font-bold mb-4 text-center">
-          {product.equipment_name}
+          {product.product_name}
         </h2>
         <img
           src="wheelchair_mark.svg"
@@ -26,10 +26,10 @@ function ProductDetailModal({ product, onClose }) {
           className="w-full h-48 object-contain mb-4"
         />
         <p className="text-xl font-semibold text-center mb-4">
-          ${product.price}
+          ${product.product_price}
         </p>
         <p className="mb-4 text-center text-black">
-          More detailed information about the product goes here...
+          {product.product_description}
         </p>
         <button className="mt-4 w-full bg-[#1F5434] hover:bg-green-600 text-white py-2 rounded">
           Add to Cart
@@ -126,25 +126,31 @@ function SequentialEquipmentDisplay({ equipment }) {
       <div className="text-black grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {currentEquipment.map((item) => (
           <div
-            key={item.equipment_id}
+            key={item.product_name}
             className="border p-4 rounded-lg shadow-md cursor-pointer"
             onClick={() => handleProductClick(item)}
           >
             <img
-              src={item.image_url || "wheelchair_mark.svg"}
-              alt={item.equipment_name}
+              src="wheelchair_mark.svg"
+              alt={item.product_name}
               className="w-full h-48 object-contain"
             />
-            <h3 className="text-lg font-semibold mt-4">
-              {item.equipment_name}
-            </h3>
+            <h3 className="text-lg font-semibold mt-4">{item.product_name}</h3>
             <p className="text-gray-700">{item.vendor_name}</p>
-            <p className="text-green-600 font-bold mt-2">${item.price}</p>
+            <p className="text-green-600 font-bold mt-2">
+              ${item.product_price}
+            </p>
             <button className="mt-4 w-full bg-green-700 hover:bg-green-800 text-white py-2 rounded">
               Add to Cart
             </button>
           </div>
         ))}
+      </div>
+      <div className="text-black bg-gray-100 p-4 rounded-lg mb-4">
+        <h2 className="text-lg font-bold mb-2">Raw Data from MySQL:</h2>
+        <pre className="whitespace-pre-wrap break-all">
+          {JSON.stringify(equipment, null, 2)}
+        </pre>
       </div>
 
       <ProductDetailModal

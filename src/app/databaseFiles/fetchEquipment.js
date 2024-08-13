@@ -4,22 +4,15 @@ export async function fetchEquipment() {
   try {
     const [rows] = await pool.query(`
       SELECT
-        e.id AS equipment_id,
-        e.name AS equipment_name,
-        e.category_id AS category_id,
-        ec.name AS category_name,
-        v.name AS vendor_name,
-        ed.price,
-        ed.order_link
+        p.product_name AS product_name,
+        p.product_category AS category_name,
+        p.price AS product_price,
+        p.vendor AS vendor_name,
+        p.description AS product_description
       FROM
-        equipment e
-      JOIN
-        equipment_categories ec ON e.category_id = ec.id
-      JOIN
-        equipment_details ed ON e.id = ed.equipment_id
-      JOIN
-        vendors v ON ed.vendor_id = v.id
-      ORDER BY ec.name, e.name
+        product_database_new p
+      ORDER BY
+        p.product_category, p.product_name
     `);
     return rows;
   } catch (error) {
