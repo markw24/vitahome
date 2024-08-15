@@ -13,18 +13,18 @@ const questions = [
     id: 2,
     question: "Do you have any floor mats at home?",
     options: ["Yes", "No"],
-  },
-  {
-    id: 3,
-    question: "Do all the mats have slip-resistant or rubber backs?",
-    options: ["Yes", "No"],
-    condition: { questionId: 2, answer: "Yes" },
-  },
-  {
-    id: 4,
-    question: "Are all the mats secured to the floor by nails or adhesive?",
-    options: ["Yes", "No"],
-    condition: { questionId: 2, answer: "Yes" },
+    subQuestions: [
+      {
+        id: 3,
+        question: "Do all the mats have slip-resistant or rubber backs?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 4,
+        question: "Are all the mats secured to the floor by nails or adhesive?",
+        options: ["Yes", "No"],
+      },
+    ],
   },
   {
     id: 5,
@@ -35,12 +35,13 @@ const questions = [
     id: 6,
     question: "Do you use any assistive devices?",
     options: ["Yes", "No"],
-  },
-  {
-    id: 7,
-    question: "Which assistive devices do you use?",
-    options: ["Cane", "Walker", "Wheelchair"],
-    condition: { questionId: 6, answer: "Yes" },
+    subQuestions: [
+      {
+        id: 7,
+        question: "Which assistive devices do you use?",
+        options: ["Cane", "Walker", "Wheelchair"],
+      },
+    ],
   },
 ];
 
@@ -52,57 +53,27 @@ export default function SurveyPage() {
   const currentQuestion = questions.find((_, index) => index + 1 === step);
 
   const handleNext = () => {
-    const relevantQuestions = questions.filter(
-      (q) =>
-        q.id === currentQuestion.id ||
-        (q.condition && q.condition.questionId === currentQuestion.id && responses[currentQuestion.id] === q.condition.answer)
-    );
-
-    const unanswered = relevantQuestions.some((q) => !responses[q.id]);
-
-    if (unanswered) {
-      setError("Please answer all questions before proceeding.");
-    } else {
-      setError("");
-
-      const newResponses = Object.keys(responses).reduce((acc, key) => {
-        const question = questions.find((q) => q.id === parseInt(key));
-        if (
-          question &&
-          (!question.condition ||
-            (question.condition.questionId !== currentQuestion.id ||
-              responses[currentQuestion.id] === question.condition.answer))
-        ) {
-          acc[key] = responses[key];
-        }
-        return acc;
-      }, {});
-
-      setResponses(newResponses);
-      setStep(step + 1);
+    if (!responses[currentQuestion.id]) {
+      setError("Please answer the current question before proceeding.");
+      return;
     }
+
+    if (currentQuestion.subQuestions) {
+      for (let subQuestion of currentQuestion.subQuestions) {
+        if (responses[currentQuestion.id] === "Yes" && !responses[subQuestion.id]) {
+          setError("Please answer all sub-questions before proceeding.");
+          return;
+        }
+      }
+    }
+
+    setError("");
+    setStep((prevStep) => prevStep + 1);
   };
 
   const handleBack = () => {
-    setStep(step - 1);
     setError("");
-
-    const previousQuestion = questions.find((_, index) => index + 1 === step - 1);
-
-    const newResponses = Object.keys(responses).reduce((acc, key) => {
-      const question = questions.find((q) => q.id === parseInt(key));
-      if (
-        question &&
-        (!question.condition ||
-          (question.condition.questionId !== previousQuestion.id ||
-            responses[previousQuestion.id] === question.condition.answer))
-      ) {
-        acc[key] = responses[key];
-      }
-      return acc;
-    }, {});
-
-    setResponses(newResponses);
+    setStep((prevStep) => prevStep - 1);
   };
 
   const handleResponseChange = (questionId, response) => {
@@ -111,21 +82,23 @@ export default function SurveyPage() {
   };
 
   const handleSubmit = () => {
-    const relevantQuestions = questions.filter(
-      (q) =>
-        q.id === currentQuestion.id ||
-        (q.condition && q.condition.questionId === currentQuestion.id && responses[currentQuestion.id] === q.condition.answer)
-    );
-
-    const unanswered = relevantQuestions.some((q) => !responses[q.id]);
-
-    if (unanswered) {
-      setError("Please answer all questions before submitting.");
-    } else {
-      setError("");
-      console.log("Survey Responses:", responses);
-      // Here you would submit the survey, display recommendations, etc.
+    if (!responses[currentQuestion.id]) {
+      setError("Please answer the current question before submitting.");
+      return;
     }
+
+    if (currentQuestion.subQuestions) {
+      for (let subQuestion of currentQuestion.subQuestions) {
+        if (responses[currentQuestion.id] === "Yes" && !responses[subQuestion.id]) {
+          setError("Please answer all sub-questions before submitting.");
+          return;
+        }
+      }
+    }
+
+    setError("");
+    console.log("Survey Responses:", responses);
+    // Here you would submit the survey, display recommendations, etc.
   };
 
   const progressPercentage = (step / questions.length) * 100;
@@ -164,40 +137,35 @@ export default function SurveyPage() {
                     </label>
                   </div>
                 ))}
+
+                {/* Render sub-questions if the response matches the condition */}
+                {currentQuestion.subQuestions &&
+                  responses[currentQuestion.id] === "Yes" &&
+                  currentQuestion.subQuestions.map((subQuestion) => (
+                    <div key={subQuestion.id} className="mt-6 pl-6 border-l-2 border-gray-300">
+                      <h3 className="text-xl font-semibold text-[#1F5434]">{subQuestion.question}</h3>
+                      <div className="mt-4">
+                        {subQuestion.options.map((option) => (
+                          <div key={option} className="mb-4">
+                            <input
+                              type="radio"
+                              id={`question-${subQuestion.id}-${option}`}
+                              name={`question-${subQuestion.id}`}
+                              value={option}
+                              checked={responses[subQuestion.id] === option}
+                              onChange={(e) => handleResponseChange(subQuestion.id, e.target.value)}
+                            />
+                            <label htmlFor={`question-${subQuestion.id}-${option}`} className="ml-3 text-lg text-gray-700">
+                              {option}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
               </div>
 
               {error && <p className="text-red-500 mt-4">{error}</p>}
-
-              {/* Conditional Drop-down Questions */}
-              {questions
-                .filter(
-                  (q) =>
-                    q.condition &&
-                    q.condition.questionId === currentQuestion.id &&
-                    responses[currentQuestion.id] === q.condition.answer
-                )
-                .map((q) => (
-                  <div key={q.id} className="w-full bg-white p-6 rounded-lg shadow-lg mt-6">
-                    <h3 className="text-xl font-semibold text-[#1F5434]">{q.question}</h3>
-                    <div className="mt-4">
-                      {q.options.map((option) => (
-                        <div key={option} className="mb-4">
-                          <input
-                            type="radio"
-                            id={`question-${q.id}-${option}`}
-                            name={`question-${q.id}`}
-                            value={option}
-                            checked={responses[q.id] === option}
-                            onChange={(e) => handleResponseChange(q.id, e.target.value)}
-                          />
-                          <label htmlFor={`question-${q.id}-${option}`} className="ml-3 text-lg text-gray-700">
-                            {option}
-                          </label>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
 
               <div className="mt-8 flex justify-between">
                 {step > 1 && (
