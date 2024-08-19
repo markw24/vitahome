@@ -94,6 +94,282 @@ const questions = [
       },
     ],
   },
+  {
+    id: 17, // Question 7 - Main Question Header
+    question: "More Lighting Questions:",
+    options: [], // No options for the main header question
+    subQuestions: [
+      {
+        id: 18,
+        question: "Can you turn a light on beside your bed without getting out of bed?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 19,
+        question: "Do you have bright lights at your front and back doors when going outside at night?",
+        options: ["Yes", "No"],
+      },
+    ],
+  },
+  {
+    id: 20, // Question 8 - Main Question Header
+    question: "Usual Chairs or couches:",
+    options: [], // No options for the main header question
+    subQuestions: [
+      {
+        id: 21,
+        question: "Does your chair have deep or soft cushions?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 22,
+        question: "Does it take more than one attempt to get up out of your sitting chair?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 23,
+        question: "Can you lower yourself into your chair in a controlled manner?",
+        options: ["Yes", "No"],
+      },
+    ],
+  },
+  {
+    id: 24, // Question 9 - Main Question Header
+    question: "Questions about your bed:",
+    options: [], // No options for the main header question
+    subQuestions: [
+      {
+        id: 25,
+        question: "Is your bed the right height for you (not too high or low)?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 26,
+        question: "does it take several attempts to get up from the side of the bed?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 27,
+        question: "Can you lower yourself into your bed in a controlled manner?",
+        options: ["Yes", "No"],
+      },
+    ],
+  },
+  {
+    id: 28, // Question 10 - Main Question Header
+    question: "Questions about your toilet:",
+    options: [], // No options for the main header question
+    subQuestions: [
+      {
+        id: 29,
+        question: "Is the toilet the right height (with or without a raised seat)?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 30,
+        question: "Do you have a grab rail fitted beside the toilet?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 31,
+        question: "Is it a long walk from your toilet to the bedroom?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 32,
+        question: "Is the toilet seat attached securely?",
+        options: ["Yes", "No"],
+      },
+    ],
+  },
+  {
+    id: 33, // Question 11 - Main Question Header
+    question: "Do you get into the bath tub to bathe?:",
+    options: ["Yes","No"], // No options for the main header question
+    subQuestions: [
+      {
+        id: 34,
+        question: "Can you safely step over the edge of the bath?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 35,
+        question: "Do you use non-slip mats or strips in the bath tub?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 36,
+        question: "Do you have a grab rail that you can use beside the bath?",
+        options: ["Yes", "No"],
+      },
+    ],
+  },
+  {
+    id: 37, // Question 12 - Main Question Header
+    question: "Do you use a shower over the bath?:",
+    options: ["Yes","No"], // No options for the main header question
+    subQuestions: [
+      {
+        id: 38,
+        question: "Do you stand in the bath to shower?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 39,
+        question: "Do you use a bath board/seat, or anything to hold onto while getting in and out of the bath when showering?",
+        options: ["Yes", "No"],
+      },
+    ],
+  },
+  {
+    id: 40, // Question 13 - Main Question Header
+    question: "So you use a shower recess or walk-in shower?:",
+    options: ["Yes","No"], // No options for the main header question
+    subQuestions: [
+      {
+        id: 41,
+        question: "Can you safely get into the shower?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 42,
+        question: "Do you have a grab bar, or anything to hold onto while getting into the shower?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 43,
+        question: "Do you use non slip mats, or strips in the shower?",
+        options: ["Yes", "No"],
+      },
+    ],
+  },
+  {
+    id: 44, // Question 14 - Main Question Header
+    question: "Can you reach commonly used items in the kitchen without bending, climbing or standing on?:",
+    options: ["Yes","No"], // No options for the main header question
+  },
+  {
+    id: 45, // Question 15 - Main Question Header
+    question: "Do you have steps or stairs at home (Indoors or outdoors)?:",
+    options: ["Yes","No"], // No options for the main header question
+    subQuestions: [
+      {
+        id: 46,
+        question: "Are any of the steps too high or too small?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 47,
+        question: "Are there full length handrails available for all INDOOR steps or stairs at home?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 48,
+        question: "Are there full length hand rails available for all OUTDOOR steps or stairs at home??",
+        options: ["Yes", "No"],
+      },
+    ],
+  },
+  {
+    id: 49, // Question 15 - Main Question Header
+    question: "Do you have steps or stairs at home (Indoors or outdoors)?:",
+    options: ["Yes","No"], // Options for the main header question
+    subQuestions: [
+      {
+        id: 50,
+        question: "Are any of the steps too high or too small?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 51,
+        question: "Are there full length handrails available for all INDOOR steps or stairs at home?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 52,
+        question: "Are there full length hand rails available for all OUTDOOR steps or stairs at home??",
+        options: ["Yes", "No"],
+      },
+    ],
+  },
+  {
+    id: 53, // Question 16 - Main Question Header
+    question: "Is there a landing at all of the entrance doors?:",
+    options: ["Yes","No"], // No options for the main header question
+    subQuestions: [
+      {
+        id: 54,
+        question: "Is it easy to lock and unlock the entrance door?",
+        options: ["Yes", "No"],
+      },
+    ],
+  },
+  {
+    id: 55, // Question 17 - Main Question Header
+    question: "These questions are about your yard at home:",
+    options: [], // No options for the main header question
+    subQuestions: [
+      {
+        id: 56,
+        question: "Are your outdoor paths cracked or contain loose pieces?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 57,
+        question: "Do you have gravel walkways at home?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 58,
+        question: "Are there any objects across your paths?",
+        options: ["Yes", "No"],
+      },
+    ],
+  },
+  {
+    id: 59, // Question 18 - Main Question Header
+    question: "Do you go barefoot at home (Indoors or outside)?:",
+    options: ["Yes","No"], // No options for the main header question
+  },
+  {
+    id: 60, // Question 19 - Main Question Header
+    question: "These questions are about your shoes:",
+    options: [], // No options for the main header question
+    subQuestions: [
+      {
+        id: 61,
+        question: "Do you have supportive shoes when walking indoors or outdoors?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 62,
+        question: "Are your shoes firm fitting?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 63,
+        question: "Do your shoes have a non-slip sole?",
+        options: ["Yes", "No"],
+      },
+    ],
+  },
+  {
+    id: 64, // Question 19 - Main Question Header
+    question: "Are you responsible for any animals at home?",
+    options: ["Yes","No"], // options for the main header question
+    subQuestions: [
+      {
+        id: 65,
+        question: "Do they get underfoot, or disturb your balance at any point?",
+        options: ["Yes", "No"],
+      },
+      {
+        id: 66,
+        question: "Do you have to exercise your pets (e.g. walk a dog)?",
+        options: ["Yes", "No"],
+      },
+    ],
+  },
 ];
 
 export default function SurveyPage() {
