@@ -27,20 +27,69 @@ const questions = [
     ],
   },
   {
-    id: 5,
-    question: "What is your primary concern?",
-    options: ["Mobility", "Safety", "Comfort"],
+    id: 5,//Question 3
+    question: "Do you have any carpeted floors at home?",
+    options: ["Yes","No"],
+    subQuestions: [
+      {
+      id: 6,
+      question: "Are the carpets in good condition and free of irregularities (Holes, lumps, tears, loose threads)?",
+      options: ["Yes", "No"],
+      },
+    ],
   },
   {
-    id: 6,
-    question: "Do you use any assistive devices?",
+    id: 7,//Question 4
+    question: "Do you have any tiles, polished floorboards or linoleum floors at home?",
+    options: ["Yes","No"],
+    subQuestions: [
+      {
+      id: 8,
+      question: "Are they in high traffic areas?",
+      options: ["Yes", "No"],
+      },
+    ],
+  },
+  {
+    id: 9,//Question 5
+    question: "Do your walkways have:",
     options: ["Yes", "No"],
     subQuestions: [
       {
-        id: 7,
-        question: "Which assistive devices do you use?",
-        options: ["Cane", "Walker", "Wheelchair"],
+      id: 10,
+      question: "Cords lying across the floor?",
+      options: ["Yes", "No"],
       },
+      {
+      id: 11,
+      question: "Items blocking doorways/doors",
+      options: ["Yes", "No"],
+      },
+      {
+          id: 12,
+          question: "Raised thresholds in doorways?",
+          options: ["Yes", "No"],
+          },
+    ],
+    id: 13,//Question 6
+    question: "At night when you have your room lights on:",
+    options: ["Yes", "No"],
+    subQuestions: [
+      {
+      id: 14,
+      question: "Are your rooms generally bright enough to read without using a lamp?",
+      options: ["Yes", "No"],
+      },
+      {
+      id: 15,
+      question: "Items blocking doorways/doors",
+      options: ["Yes", "No"],
+      },
+      {
+          id: 16,
+          question: "Raised thresholds in doorways?",
+          options: ["Yes", "No"],
+          },
     ],
   },
 ];
