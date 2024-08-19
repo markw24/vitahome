@@ -69,27 +69,6 @@ export default function Contact() {
                   className="border border-gray-300 p-3 w-full rounded-md text-black"
                 />
               </div>
-              <div className="mb-4 text-black">
-                <label className="block mb-2">Select Subject?</label>
-                <div className="flex space-x-4">
-                  <label className="flex items-center">
-                    <input type="radio" name="subject" className="mr-2" />
-                    General Inquiry
-                  </label>
-                  <label className="flex items-center">
-                    <input type="radio" name="subject" className="mr-2" />
-                    General Inquiry
-                  </label>
-                  <label className="flex items-center">
-                    <input type="radio" name="subject" className="mr-2" />
-                    General Inquiry
-                  </label>
-                  <label className="flex items-center">
-                    <input type="radio" name="subject" className="mr-2" />
-                    General Inquiry
-                  </label>
-                </div>
-              </div>
               <div className="mb-4">
                 <textarea
                   placeholder="Write your message.."

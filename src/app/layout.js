@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 export const metadata = {
   title: 'Vita Home',
-  description: 'Your Site Description',
+  description: 'Supplementing traditional professional recommendations and aiding those who are simply looking to research for themselves',
 };
 
 export default function RootLayout({ children }) {
