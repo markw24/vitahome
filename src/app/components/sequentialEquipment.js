@@ -146,12 +146,12 @@ function SequentialEquipmentDisplay({ equipment }) {
           </div>
         ))}
       </div>
-      <div className="text-black bg-gray-100 p-4 rounded-lg mb-4">
+      {/* <div className="text-black bg-gray-100 p-4 rounded-lg mb-4">
         <h2 className="text-lg font-bold mb-2">Raw Data from MySQL:</h2>
         <pre className="whitespace-pre-wrap break-all">
           {JSON.stringify(equipment, null, 2)}
         </pre>
-      </div>
+      </div> */}
 
       <ProductDetailModal
         product={selectedProduct}
