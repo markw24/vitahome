@@ -1,18 +1,18 @@
-'use client';
+import { fetchEquipment } from "../databaseFiles/fetchEquipment";
+import SequentialEquipmentDisplay from "../components/Products";
 import Navbar from "../components/Navbar";
-import Footer from "../components/footer";
-import ProductPage from "../components/Products";
 
-export default function Recommendations() {
+export default async function HomePage() {
+  const equipment = await fetchEquipment();
+
   return (
-    <>
+    <div>
       <main className="bg-white min-h-screen">
         <Navbar />
-        <div className="flex flex-col py-10 px-20 items-center">
-          <ProductPage /> 
+        <div>
+          <SequentialEquipmentDisplay equipment={equipment} />
         </div>
-        <Footer />
       </main>
-    </>
+    </div>
   );
 }
