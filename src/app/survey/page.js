@@ -1,8 +1,10 @@
 'use client';
 import { useState } from "react";
+import { useRouter } from 'next/navigation'; // Import from 'next/navigation'
 import Navbar from "../components/Navbar";
 import Footer from "../components/footer";
 
+// Define the questions array
 const questions = [
   {
     id: 1,
@@ -145,7 +147,7 @@ const questions = [
       },
       {
         id: 26,
-        question: "does it take several attempts to get up from the side of the bed?",
+        question: "Does it take several attempts to get up from the side of the bed?",
         options: ["Yes", "No"],
       },
       {
@@ -184,8 +186,8 @@ const questions = [
   },
   {
     id: 33, // Question 11 - Main Question Header
-    question: "Do you get into the bath tub to bathe?:",
-    options: ["Yes","No"], // No options for the main header question
+    question: "Do you get into the bath tub to bathe?",
+    options: ["Yes", "No"], // Options for the main header question
     subQuestions: [
       {
         id: 34,
@@ -206,8 +208,8 @@ const questions = [
   },
   {
     id: 37, // Question 12 - Main Question Header
-    question: "Do you use a shower over the bath?:",
-    options: ["Yes","No"], // No options for the main header question
+    question: "Do you use a shower over the bath?",
+    options: ["Yes", "No"], // Options for the main header question
     subQuestions: [
       {
         id: 38,
@@ -223,8 +225,8 @@ const questions = [
   },
   {
     id: 40, // Question 13 - Main Question Header
-    question: "So you use a shower recess or walk-in shower?:",
-    options: ["Yes","No"], // No options for the main header question
+    question: "Do you use a shower recess or walk-in shower?",
+    options: ["Yes", "No"], // Options for the main header question
     subQuestions: [
       {
         id: 41,
@@ -238,20 +240,20 @@ const questions = [
       },
       {
         id: 43,
-        question: "Do you use non slip mats, or strips in the shower?",
+        question: "Do you use non-slip mats, or strips in the shower?",
         options: ["Yes", "No"],
       },
     ],
   },
   {
     id: 44, // Question 14 - Main Question Header
-    question: "Can you reach commonly used items in the kitchen without bending, climbing or standing on?:",
-    options: ["Yes","No"], // No options for the main header question
+    question: "Can you reach commonly used items in the kitchen without bending, climbing or standing on something?",
+    options: ["Yes", "No"], // Options for the main header question
   },
   {
     id: 45, // Question 15 - Main Question Header
-    question: "Do you have steps or stairs at home (Indoors or outdoors)?:",
-    options: ["Yes","No"], // No options for the main header question
+    question: "Do you have steps or stairs at home (Indoors or outdoors)?",
+    options: ["Yes", "No"], // Options for the main header question
     subQuestions: [
       {
         id: 46,
@@ -265,137 +267,192 @@ const questions = [
       },
       {
         id: 48,
-        question: "Are there full length hand rails available for all OUTDOOR steps or stairs at home??",
+        question: "Are there full length hand rails available for all OUTDOOR steps or stairs at home?",
         options: ["Yes", "No"],
       },
     ],
   },
   {
-    id: 49, // Question 15 - Main Question Header
-    question: "Do you have steps or stairs at home (Indoors or outdoors)?:",
-    options: ["Yes","No"], // Options for the main header question
+    id: 49, // Question 16 - Main Question Header
+    question: "Is there a landing at all of the entrance doors?",
+    options: ["Yes", "No"], // Options for the main header question
     subQuestions: [
       {
         id: 50,
-        question: "Are any of the steps too high or too small?",
-        options: ["Yes", "No"],
-      },
-      {
-        id: 51,
-        question: "Are there full length handrails available for all INDOOR steps or stairs at home?",
-        options: ["Yes", "No"],
-      },
-      {
-        id: 52,
-        question: "Are there full length hand rails available for all OUTDOOR steps or stairs at home??",
-        options: ["Yes", "No"],
-      },
-    ],
-  },
-  {
-    id: 53, // Question 16 - Main Question Header
-    question: "Is there a landing at all of the entrance doors?:",
-    options: ["Yes","No"], // No options for the main header question
-    subQuestions: [
-      {
-        id: 54,
         question: "Is it easy to lock and unlock the entrance door?",
         options: ["Yes", "No"],
       },
     ],
   },
   {
-    id: 55, // Question 17 - Main Question Header
+    id: 51, // Question 17 - Main Question Header
     question: "These questions are about your yard at home:",
     options: [], // No options for the main header question
     subQuestions: [
       {
-        id: 56,
+        id: 52,
         question: "Are your outdoor paths cracked or contain loose pieces?",
         options: ["Yes", "No"],
       },
       {
-        id: 57,
+        id: 53,
         question: "Do you have gravel walkways at home?",
         options: ["Yes", "No"],
       },
       {
-        id: 58,
+        id: 54,
         question: "Are there any objects across your paths?",
         options: ["Yes", "No"],
       },
     ],
   },
   {
-    id: 59, // Question 18 - Main Question Header
-    question: "Do you go barefoot at home (Indoors or outside)?:",
-    options: ["Yes","No"], // No options for the main header question
+    id: 55, // Question 18 - Main Question Header
+    question: "Do you go barefoot at home (Indoors or outside)?",
+    options: ["Yes", "No"], // Options for the main header question
   },
   {
-    id: 60, // Question 19 - Main Question Header
+    id: 56, // Question 19 - Main Question Header
     question: "These questions are about your shoes:",
     options: [], // No options for the main header question
     subQuestions: [
       {
-        id: 61,
+        id: 57,
         question: "Do you have supportive shoes when walking indoors or outdoors?",
         options: ["Yes", "No"],
       },
       {
-        id: 62,
+        id: 58,
         question: "Are your shoes firm fitting?",
         options: ["Yes", "No"],
       },
       {
-        id: 63,
+        id: 59,
         question: "Do your shoes have a non-slip sole?",
         options: ["Yes", "No"],
       },
     ],
   },
   {
-    id: 64, // Question 19 - Main Question Header
+    id: 60, // Question 20 - Main Question Header
     question: "Are you responsible for any animals at home?",
-    options: ["Yes","No"], // options for the main header question
+    options: ["Yes", "No"], // Options for the main header question
     subQuestions: [
       {
-        id: 65,
+        id: 61,
         question: "Do they get underfoot, or disturb your balance at any point?",
         options: ["Yes", "No"],
       },
       {
-        id: 66,
-        question: "Do you have to exercise your pets (e.g. walk a dog)?",
+        id: 62,
+        question: "Do you have to exercise your pets (e.g., walk a dog)?",
         options: ["Yes", "No"],
       },
     ],
   },
 ];
 
+// Define the score mapping
+const scoreMapping = {
+  1: { Yes: -1, No: 0 },
+  2: { Yes: 0, No: 0 },
+  3: { Yes: 1, No: -1 },
+  4: { Yes: 1, No: -1 },
+  5: { Yes: 0, No: 0 },
+  6: { Yes: 1, No: -1 },
+  7: { Yes: 1, No: -1 },
+  8: { Yes: -1, No: 0 },
+  9: { Yes: 0, No: 0 },
+  10: { Yes: -1, No: 0 },
+  11: { Yes: -1, No: 0 },
+  12: { Yes: -1, No: 0 },
+  13: { Yes: 0, No: 0 },
+  14: { Yes: -1, No: 0 },
+  15: { Yes: -1, No: 0 },
+  16: { Yes: -1, No: 0 },
+  17: { Yes: 0, No: 0 },
+  18: { Yes: -1, No: 0 },
+  19: { Yes: -1, No: 0 },
+  20: { Yes: 0, No: 0 },
+  21: { Yes: -1, No: 0 },
+  22: { Yes: -1, No: 0 },
+  23: { Yes: 0, No: 0 },
+  24: { Yes: 0, No: 0 },
+  25: { Yes: 1, No: 0 },
+  26: { Yes: -1, No: 0 },
+  27: { Yes: 0, No: 0 },
+  28: { Yes: 0, No: 0 },
+  29: { Yes: 1, No: -1 },
+  30: { Yes: 0, No: -1 },
+  31: { Yes: -1, No: 0 },
+  32: { Yes: 0, No: -1 },
+  33: { Yes: 0, No: 0 },
+  34: { Yes: -1, No: 0 },
+  35: { Yes: -1, No: 0 },
+  36: { Yes: -1, No: 0 },
+  37: { Yes: 0, No: 0 },
+  38: { Yes: -1, No: 0 },
+  39: { Yes: -1, No: 0 },
+  40: { Yes: 0, No: 0 },
+  41: { Yes: -1, No: 0 },
+  42: { Yes: -1, No: 0 },
+  43: { Yes: -1, No: 0 },
+  44: { Yes: 0, No: 0 },
+  45: { Yes: 0, No: 0 },
+  46: { Yes: -1, No: 0 },
+  47: { Yes: -1, No: 0 },
+  48: { Yes: -1, No: 0 },
+  49: { Yes: 0, No: 0 },
+  50: { Yes: -1, No: 0 },
+  51: { Yes: 0, No: 0 },
+  52: { Yes: -1, No: 0 },
+  53: { Yes: -1, No: 0 },
+  54: { Yes: -1, No: 0 },
+  55: { Yes: 0, No: 0 },
+  56: { Yes: 0, No: 0 },
+  57: { Yes: -1, No: 0 },
+  58: { Yes: -1, No: 0 },
+  59: { Yes: -1, No: 0 },
+  60: { Yes: 0, No: 0 },
+  61: { Yes: -1, No: 0 },
+  62: { Yes: -1, No: 0 },
+};
+
 export default function SurveyPage() {
   const [step, setStep] = useState(1);
   const [responses, setResponses] = useState({});
   const [error, setError] = useState("");
+  const [score, setScore] = useState(0);
+  const router = useRouter(); // Use the next/navigation router
 
   const currentQuestion = questions.find((_, index) => index + 1 === step);
 
   const handleNext = () => {
-    // Check if current question is answered
     if (currentQuestion.options.length > 0 && !responses[currentQuestion.id]) {
       setError("Please answer the current question before proceeding.");
       return;
     }
 
-    // Check if sub-questions should be answered
+    if (currentQuestion.options.length > 0 && scoreMapping[currentQuestion.id]) {
+      const response = responses[currentQuestion.id];
+      const currentScore = scoreMapping[currentQuestion.id][response] ?? 0;
+      setScore(prevScore => prevScore + currentScore);
+    }
+
     if (currentQuestion.subQuestions) {
       for (let subQuestion of currentQuestion.subQuestions) {
-        // Only check for sub-question responses if the main question has been answered "Yes" or if there are no main question options
         if (
           (currentQuestion.options.length === 0 || responses[currentQuestion.id] === "Yes") &&
           !responses[subQuestion.id]
         ) {
           setError("Please answer all sub-questions before proceeding.");
           return;
+        }
+
+        if (scoreMapping[subQuestion.id]) {
+          const response = responses[subQuestion.id];
+          const subQuestionScore = scoreMapping[subQuestion.id][response] ?? 0;
+          setScore(prevScore => prevScore + subQuestionScore);
         }
       }
     }
@@ -415,10 +472,15 @@ export default function SurveyPage() {
   };
 
   const handleSubmit = () => {
-    // Same checks as in handleNext
     if (currentQuestion.options.length > 0 && !responses[currentQuestion.id]) {
       setError("Please answer the current question before submitting.");
       return;
+    }
+
+    if (currentQuestion.options.length > 0 && scoreMapping[currentQuestion.id]) {
+      const response = responses[currentQuestion.id];
+      const currentScore = scoreMapping[currentQuestion.id][response] ?? 0;
+      setScore(prevScore => prevScore + currentScore);
     }
 
     if (currentQuestion.subQuestions) {
@@ -430,12 +492,19 @@ export default function SurveyPage() {
           setError("Please answer all sub-questions before submitting.");
           return;
         }
+
+        if (scoreMapping[subQuestion.id]) {
+          const response = responses[subQuestion.id];
+          const subQuestionScore = scoreMapping[subQuestion.id][response] ?? 0;
+          setScore(prevScore => prevScore + subQuestionScore);
+        }
       }
     }
 
     setError("");
-    console.log("Survey Responses:", responses);
-    // Here you would submit the survey, display recommendations, etc.
+
+    // Navigate to the recommendations page with the final score
+    router.push(`/recommendations?score=${score}`);
   };
 
   const progressPercentage = (step / questions.length) * 100;
@@ -459,7 +528,6 @@ export default function SurveyPage() {
             <div className="w-full max-w-lg bg-white p-8 rounded-lg shadow-lg">
               <h2 className="text-2xl font-semibold text-[#1F5434]">{currentQuestion.question}</h2>
               <div className="mt-6">
-                {/* Render main question options if available */}
                 {currentQuestion.options.length > 0 &&
                   currentQuestion.options.map((option) => (
                     <div key={option} className="mb-6">
@@ -477,7 +545,6 @@ export default function SurveyPage() {
                     </div>
                   ))}
 
-                {/* Always render sub-questions if no main question options or if "Yes" is selected */}
                 {currentQuestion.subQuestions &&
                   (currentQuestion.options.length === 0 || responses[currentQuestion.id] === "Yes") &&
                   currentQuestion.subQuestions.map((subQuestion) => (
