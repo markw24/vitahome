@@ -1,5 +1,6 @@
 'use client';
 import { useState } from "react";
+import { useRouter } from 'next/navigation'; // Import from 'next/navigation'
 import Navbar from "../components/Navbar";
 import Footer from "../components/footer";
 
@@ -422,6 +423,7 @@ export default function SurveyPage() {
   const [responses, setResponses] = useState({});
   const [error, setError] = useState("");
   const [score, setScore] = useState(0);
+  const router = useRouter(); // Use the next/navigation router
 
   const currentQuestion = questions.find((_, index) => index + 1 === step);
 
@@ -433,7 +435,7 @@ export default function SurveyPage() {
 
     if (currentQuestion.options.length > 0 && scoreMapping[currentQuestion.id]) {
       const response = responses[currentQuestion.id];
-      const currentScore = scoreMapping[currentQuestion.id][response] ?? 0; // Safeguard against undefined
+      const currentScore = scoreMapping[currentQuestion.id][response] ?? 0;
       setScore(prevScore => prevScore + currentScore);
     }
 
@@ -449,7 +451,7 @@ export default function SurveyPage() {
 
         if (scoreMapping[subQuestion.id]) {
           const response = responses[subQuestion.id];
-          const subQuestionScore = scoreMapping[subQuestion.id][response] ?? 0; // Safeguard against undefined
+          const subQuestionScore = scoreMapping[subQuestion.id][response] ?? 0;
           setScore(prevScore => prevScore + subQuestionScore);
         }
       }
@@ -477,7 +479,7 @@ export default function SurveyPage() {
 
     if (currentQuestion.options.length > 0 && scoreMapping[currentQuestion.id]) {
       const response = responses[currentQuestion.id];
-      const currentScore = scoreMapping[currentQuestion.id][response] ?? 0; // Safeguard against undefined
+      const currentScore = scoreMapping[currentQuestion.id][response] ?? 0;
       setScore(prevScore => prevScore + currentScore);
     }
 
@@ -493,16 +495,16 @@ export default function SurveyPage() {
 
         if (scoreMapping[subQuestion.id]) {
           const response = responses[subQuestion.id];
-          const subQuestionScore = scoreMapping[subQuestion.id][response] ?? 0; // Safeguard against undefined
+          const subQuestionScore = scoreMapping[subQuestion.id][response] ?? 0;
           setScore(prevScore => prevScore + subQuestionScore);
         }
       }
     }
 
     setError("");
-    console.log("Survey Responses:", responses);
-    console.log("Final Score:", score);
-    alert(`Final Score: ${score}`);
+
+    // Navigate to the recommendations page with the final score
+    router.push(`/recommendations?score=${score}`);
   };
 
   const progressPercentage = (step / questions.length) * 100;
